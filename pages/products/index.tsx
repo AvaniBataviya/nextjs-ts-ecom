@@ -1,6 +1,7 @@
 import { Box, Grid, Paper, styled, Typography } from "@mui/material";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { apiBaseEndPoint } from "../../src/components/helper";
@@ -49,21 +50,14 @@ const Products = ({ products }: { products: IProduct[] }) => {
                     width: "100%",
                   }}
                 >
-                  <Image
-                    src={product.thumbnail}
-                    alt={product.title}
-                    fill
-                    objectFit="cover"
-                  />
+                  <Image src={product.thumbnail} alt={product.title} fill />
                 </Box>
-                <Box
-                  sx={{ p: 2, cursor: "pointer" }}
-                  role="link"
-                  onClick={() => router.push(`/products/${product.id}`)}
-                >
-                  <Typography variant="h6" component="h2" noWrap>
-                    {product.title}
-                  </Typography>
+                <Box sx={{ p: 2, cursor: "pointer" }}>
+                  <Link href={`/products/${product.id}`}>
+                    <Typography variant="h6" component="h2" noWrap>
+                      {product.title}
+                    </Typography>
+                  </Link>
                   <Typography variant="subtitle1">{product.brand}</Typography>
                   <Typography variant="subtitle1">{`${product.price} rs`}</Typography>
                   <Typography variant="subtitle2">{`${product.brand}`}</Typography>
