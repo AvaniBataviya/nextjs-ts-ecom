@@ -25,6 +25,9 @@ const Header = () => {
             Ecommerce app
           </Typography>
         </Box>
+        <Link href="/about" className={styles.link}>
+          <Button color="inherit">About</Button>
+            </Link>
         {true && (
           <>
             <Link href="/products" className={styles.link}>
