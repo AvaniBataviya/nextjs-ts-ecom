@@ -1,14 +1,18 @@
 import { Box, ImageList, ImageListItem, Typography } from "@mui/material";
 import { GetStaticPaths } from "next";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
 import { IProduct } from ".";
 import { apiBaseEndPoint } from "../../src/components/helper";
 
 const ProductDetail = ({ product }: { product: IProduct }) => {
-  if (!product) {
+  const router = useRouter();
+
+  if (router.isFallback) {
     return "Loading...";
   }
+
   return (
     <Box sx={{ display: "flex", alignItem: "center", mt: 4 }}>
       <ImageList
@@ -69,9 +73,11 @@ export async function getStaticProps(context: { params: { id: string } }) {
 
   const res = await fetch(`${apiBaseEndPoint}/products/${id}`);
   const product = await res.json();
-  return {
-    props: { product },
-  };
+  if (!product.id) {
+    return { notFound: true };
+  }
+
+  return { props: { product } };
 }
 
 export default ProductDetail;
