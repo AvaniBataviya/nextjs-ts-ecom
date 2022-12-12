@@ -3,6 +3,7 @@ import { GetStaticPaths } from "next";
 import Image from "next/image";
 import React from "react";
 import { IProduct } from ".";
+import { apiBaseEndPoint } from "../../src/components/helper";
 
 const ProductDetail = ({ product }: { product: IProduct }) => {
   if (!product) {
@@ -62,12 +63,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 // export const getStaticProps: GetStaticProps = async (context: { params: { id: string } }) => {
 export async function getStaticProps(context: { params: { id: string } }) {
-  
   const {
     params: { id },
   } = context;
 
-  const res = await fetch(`https://dummyjson.com/products/${id}`);
+  const res = await fetch(`${apiBaseEndPoint}/products/${id}`);
   const product = await res.json();
   return {
     props: { product },

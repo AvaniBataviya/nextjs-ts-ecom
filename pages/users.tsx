@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { apiBaseEndPoint } from "../src/components/helper";
 
 interface IUser {
   id: string;
@@ -23,7 +24,7 @@ const Users = () => {
   const [users, setUsers] = useState<IUser[]>([]);
 
   useEffect(() => {
-    fetch(`https://dummyjson.com/users`)
+    fetch(`${apiBaseEndPoint}/users`)
       .then((res) => res.json())
       .then((data) => {
         const users = data?.users.map((user: IUser) => ({

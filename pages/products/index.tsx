@@ -3,6 +3,7 @@ import { GetServerSideProps } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
+import { apiBaseEndPoint } from "../../src/components/helper";
 
 export interface IProduct {
   id: number;
@@ -78,7 +79,7 @@ const Products = ({ products }: { products: IProduct[] }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch(`https://dummyjson.com/products`);
+  const res = await fetch(`${apiBaseEndPoint}/products`);
   const data = await res.json();
   return { props: { products: data?.products || [] } };
 };
