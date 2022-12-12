@@ -4,9 +4,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import styles from "../../../styles/Home.module.css";
+import { deleteCookie } from "cookies-next";
+import { getUserIdFromCookie } from "../helper";
 
 const Header = () => {
   const router = useRouter();
+  const userId = getUserIdFromCookie();
 
   return (
     <AppBar position="sticky">
@@ -18,7 +21,10 @@ const Header = () => {
             display: "flex",
             alignItems: "center",
           }}
-          onClick={() => router.push("/")}
+          onClick={() => {
+            router.push(userId ? "/dashboard" : "/");
+            document.cookie = `user=""`;
+          }}
         >
           <ShoppingCart sx={{ mr: 2 }} />
           <Typography variant="h6" color="inherit" noWrap>
@@ -27,12 +33,21 @@ const Header = () => {
         </Box>
         <Link href="/about" className={styles.link}>
           <Button color="inherit">About</Button>
-            </Link>
-        {true && (
+        </Link>
+        {userId && (
           <>
             <Link href="/products" className={styles.link}>
               <Button color="inherit">Products</Button>
             </Link>
+            <Button
+              color="inherit"
+              onClick={() => {
+                deleteCookie("user");
+                router.push("/");
+              }}
+            >
+              Logout
+            </Button>
           </>
         )}
       </Toolbar>

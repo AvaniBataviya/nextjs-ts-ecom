@@ -1,4 +1,5 @@
 import Head from "next/head";
+import SignInForm from "../src/components/auth/SignInForm";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
@@ -7,7 +8,7 @@ export default function Home() {
       <Head>
         <title>Home page</title>
       </Head>
-      <h1>Home Page</h1>
+      <SignInForm />
     </div>
   );
 }
