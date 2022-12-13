@@ -52,9 +52,17 @@ const Products = ({ products }: { products: IProduct[] }) => {
                 >
                   <Image src={product.thumbnail} alt={product.title} fill />
                 </Box>
-                <Box sx={{ p: 2, cursor: "pointer" }}>
-                  <Link href={`/products/${product.id}`}>
-                    <Typography variant="h6" component="h2" noWrap>
+                <Box sx={{ p: 2 }}>
+                  <Link
+                    href={`/products/${product.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Typography
+                      variant="h6"
+                      component="h2"
+                      noWrap
+                      color="secondary"
+                    >
                       {product.title}
                     </Typography>
                   </Link>

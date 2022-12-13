@@ -4,6 +4,7 @@ import Head from "next/head";
 import { Fragment } from "react";
 import Header from "../src/components/layout/Header";
 import theme from "../src/theme";
+import NextNProgress from "nextjs-progressbar";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header />
+        <NextNProgress />
         <Component {...pageProps} />
       </ThemeProvider>
     </Fragment>
